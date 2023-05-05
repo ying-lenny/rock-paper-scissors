@@ -13,8 +13,6 @@ function attackTime(playerResult, robotPlay) {
     // Draw
     if (playerResult === robotPlay) {
         console.log(`It's a draw! You both chose ${playerResult}`)
-        // playerLives = loseRound(playerLives);
-        // robotLives = loseRound(robotLives);
     }
 
     // Rock
@@ -23,6 +21,24 @@ function attackTime(playerResult, robotPlay) {
         playerLives = loseRound(playerLives);
     } else if (playerResult === "Rock" && robotPlay === "Scissors") {
         console.log("Rock beats Scissors, player wins");
+        robotLives = loseRound(robotLives);
+    }
+
+    // Paper
+    if (playerResult === "Paper" && robotPlay === "Rock") {
+        console.log("Paper beats Rock, player wins");
+        robotLives = loseRound(robotLives);
+    } else if (playerResult === "Paper" && robotPlay === "Scissors") {
+        console.log("Scissors beats Paper, player loses");
+        playerLives = loseRound(playerLives);
+    }
+
+    // Scissors
+    if (playerResult === "Scissors" && robotPlay === "Rock") {
+        console.log("Rock beats Scissors, player loses");
+        playerLives = loseRound(playerLives);
+    } else if (playerResult === "Scissors" && robotPlay === "Paper") {
+        console.log("Scissors beats Paper, player wins");
         robotLives = loseRound(robotLives);
     }
 }
@@ -38,19 +54,14 @@ function rockPaperScissors() {
     let playerChoice = prompt("Okay Player, type your weapon of choice")
     
     console.clear()
-    console.log(`The robot has chosen ${robotPlay}`)
-    
     switch (playerChoice) {
         case "Paper": case "P": case "paper": case "p": case "1":
-            console.log("You have chosen Paper");
             playerResult = "Paper";
             break;
         case "Scissors": case "S": case "scissors": case "s": case "2":
-            console.log("You have selected Scissors");
             playerResult = "Scissors";
             break;
         case "Rock": case "R": case "rock": case "r": case "3":
-            console.log("You have picked Rock");
             playerResult = "Rock";
             break;
         case null:
@@ -60,10 +71,15 @@ function rockPaperScissors() {
             console.log("The player has chosen... something invalid?")
             break;
     }
+    console.log(`%cThe Robot has chosen: ${robotPlay} | The Player has chosen: ${playerResult}`,
+        "display: inline-block; background-color: darkblue; color: white; font-weight: 800;" + "padding: 10px;")   
     attackTime(playerResult, robotPlay)
     countRounds()
-    console.log(`Player lives: ${playerLives} | Robot Lives: ${robotLives}`)
-    console.log(`Round: ${round}`)
+    console.log(`%cPlayer lives: ${playerLives} | Robot Lives: ${robotLives}`,
+        "display: inline-block; background-color: darkblue; color: white; font-weight: 800;" + "padding: 10px;")
+    console.log(`%cRound: ${round}`,
+        "display: inline-block; border: 3px solid red ; border-radius: 7px ; " +
+        "padding: 10px ; margin: 10px ;")
     rockPaperScissors()
 }
 

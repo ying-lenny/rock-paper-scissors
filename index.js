@@ -1,14 +1,25 @@
 let playerLives = 5;
 let robotLives = 5;
 let round = 0;
-let playerResult
-let robotPlay
+let playerResult;
+let robotPlay;
+let finished = false;
 
+// Increments round counter by 1
 function countRounds() {
     round++;
     return round;
 }
 
+// Intiates game
+function startGame() {
+    playerLives = 5;
+    robotLives = 5;
+    round = 0;
+    rockPaperScissors()
+}
+
+// Attack phase of game logic
 function attackTime(playerResult, robotPlay) {
     // Draw
     if (playerResult === robotPlay) {
@@ -43,44 +54,65 @@ function attackTime(playerResult, robotPlay) {
     }
 }
 
+// Detects when someone's lives reaches 0 and ends the game.
+function isFinished() {
+    if (playerLives === 0 || robotLives === 0) {
+        console.log("Game Over!")
+        return;
+    } else {
+        rockPaperScissors()
+    }
+}
+
+// Decrements the lives of the round's loser
 function loseRound(loser) {
     var lost = loser - 1;
     return lost;
 }
 
+// Game logic
 function rockPaperScissors() {
+    // Randomly determines robot's next move from preterminded list
     const robotChoices = ["Rock","Paper","Scissors"]
     let robotPlay = robotChoices[Math.floor(Math.random()*robotChoices.length)];
     let playerChoice = prompt("Okay Player, type your weapon of choice")
-    
+    // Needed to catch when player hits cancel on prompt as trying to lowercase a null returns an error
+    if (playerChoice != null) {
+        playerChoice = playerChoice.toLowerCase()
+    }
+    // Clears the console at the start of the next round
     console.clear()
     switch (playerChoice) {
-        case "Paper": case "P": case "paper": case "p": case "1":
+        case "paper": case "p": case "1":
             playerResult = "Paper";
             break;
-        case "Scissors": case "S": case "scissors": case "s": case "2":
+        case "scissors": case "s": case "2":
             playerResult = "Scissors";
             break;
-        case "Rock": case "R": case "rock": case "r": case "3":
+        case "rock": case "r": case "3":
             playerResult = "Rock";
             break;
         case null:
             console.log("Another time maybe...")
             return
+        case "reset": 
+            startGame();
         default:
             console.log("The player has chosen... something invalid?")
+            playerResult = ""
             break;
     }
-    console.log(`%cThe Robot has chosen: ${robotPlay} | The Player has chosen: ${playerResult}`,
+
+    console.log(`%cThe Player has chosen: ${playerResult} | The Robot has chosen: ${robotPlay}`,
         "display: inline-block; background-color: darkblue; color: white; font-weight: 800;" + "padding: 10px;")   
+    
     attackTime(playerResult, robotPlay)
     countRounds()
     console.log(`%cPlayer lives: ${playerLives} | Robot Lives: ${robotLives}`,
         "display: inline-block; background-color: darkblue; color: white; font-weight: 800;" + "padding: 10px;")
+
     console.log(`%cRound: ${round}`,
         "display: inline-block; border: 3px solid red ; border-radius: 7px ; " +
         "padding: 10px ; margin: 10px ;")
-    rockPaperScissors()
+    isFinished()
 }
-
-rockPaperScissors()

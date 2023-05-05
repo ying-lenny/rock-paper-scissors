@@ -57,7 +57,8 @@ function attackTime(playerResult, robotPlay) {
 // Detects when someone's lives reaches 0 and ends the game.
 function isFinished() {
     if (playerLives === 0 || robotLives === 0) {
-        console.log("Game Over!")
+        console.log("%cGame Over!",
+            "display: inline-block; background-color: red; color: white; font-weight: 1000;" + "padding: 10px;")
         return;
     } else {
         rockPaperScissors()

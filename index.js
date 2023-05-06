@@ -72,7 +72,10 @@ function loseRound(loser) {
 }
 
 function explainGame() {
-    alert("Welcome to rock paper scissors! \nType either rock, paper or scissors in the following prompt to attack. \nType reset to reset the game")
+    alert("Welcome to rock paper scissors!" +
+    "\nType either rock, paper or scissors in the following prompt to attack." +
+    "\nType reset to reset the game" +
+    "\nType help to see these instructions again")  
 }
 
 explainGame()
@@ -104,6 +107,13 @@ function rockPaperScissors() {
             return
         case "reset": 
             startGame();
+            break;
+        case "help":
+            alert("Welcome to rock paper scissors!" +
+            "\nType either rock, paper or scissors in the following prompt to attack." +
+            "\nType reset to reset the game" +
+            "\nType help to see these instructions again")                
+            break;
         default:
             console.log("The player has chosen... something invalid?")
             playerResult = ""

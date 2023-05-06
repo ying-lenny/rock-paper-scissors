@@ -114,7 +114,9 @@ function rockPaperScissors() {
         "display: inline-block; background-color: darkblue; color: white; font-weight: 800;" + "padding: 10px;")   
     
     attackTime(playerResult, robotPlay)
-    countRounds()
+    if (playerResult != "") {
+        countRounds()
+    }
     console.log(`%cPlayer lives: ${playerLives} | Robot Lives: ${robotLives}`,
         "display: inline-block; background-color: darkblue; color: white; font-weight: 800;" + "padding: 10px;")
 

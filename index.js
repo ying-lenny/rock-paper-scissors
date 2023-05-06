@@ -71,6 +71,12 @@ function loseRound(loser) {
     return lost;
 }
 
+function explainGame() {
+    alert("Welcome to rock paper scissors! \nType either rock, paper or scissors in the following prompt to attack. \nType reset to reset the game")
+}
+
+explainGame()
+
 // Game logic
 function rockPaperScissors() {
     // Randomly determines robot's next move from preterminded list
@@ -117,3 +123,5 @@ function rockPaperScissors() {
         "padding: 10px ; margin: 10px ;")
     isFinished()
 }
+
+rockPaperScissors()

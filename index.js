@@ -79,7 +79,7 @@ function rockPaperScissors() {
     let playerChoice = prompt("Okay Player, type your weapon of choice")
     // Needed to catch when player hits cancel on prompt as trying to lowercase a null returns an error
     if (playerChoice != null) {
-        playerChoice = playerChoice.toLowerCase()
+        playerChoice = playerChoice.replace(/ /g,'').toLowerCase()
     }
     // Clears the console at the start of the next round
     console.clear()
